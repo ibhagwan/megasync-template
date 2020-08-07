@@ -1,0 +1,9 @@
+--- src/MEGASync/gui/MegaSpeedGraph.h
++++ -
+@@ -1,6 +1,7 @@
+ #ifndef MEGASPEEDGRAPH_H
+ #define MEGASPEEDGRAPH_H
+ 
++#include <QPainterPath>
+ #include <QWidget>
+ #include "megaapi.h"

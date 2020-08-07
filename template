@@ -1,0 +1,71 @@
+# Template file for 'MEGAsync'
+pkgname=MEGAsync
+version=4.3.3.0
+revision=1
+wrksrc="${pkgname}-${version}_Linux"
+build_wrksrc=src
+build_style=qmake
+configure_args='"CONFIG+=FULLREQUIREMENTS"'
+hostmakedepends="git pkg-config autoconf automake libtool qt5-qmake qt5-host-tools"
+makedepends="qt5-tools-devel qt5-devel qt5-svg-devel qt5-x11extras-devel MEGAsdk-devel MEGAsdk-qt libraw-devel libgomp-devel"
+short_desc="Automated syncing with MEGA Cloud Drive"
+maintainer="John <me@johnnynator.dev>"
+license="custom: Proprietary"
+homepage="https://mega.co.nz"
+#distfiles="https://github.com/meganz/MEGAsync/archive/v${version}_Linux.tar.gz"
+#checksum=9150394fc7c441769eacc52d705faabac835ec3263cca099f7cad84d3b726fb4
+restricted=yes
+nocross=yes
+
+case "$XBPS_TARGET_MACHINE" in
+	*-musl|ppc*) broken="google breakpad";;
+esac
+
+do_fetch() {
+  git clone --depth 1 --branch v${version}_Linux "https://github.com/meganz/MEGAsync.git" ${wrksrc}
+  git clone "https://github.com/meganz/sdk.git" meganz-sdk
+  cd ${wrksrc}
+  git submodule init
+  git config submodule.src/MEGASync/mega.url "../meganz-sdk"
+  git submodule update
+}
+
+#pre_configure() {
+#	NOCONFIGURE=1 ./autogen.sh
+#}
+
+pre_build() {
+  # build sdk
+  cd "${wrksrc}/src/MEGASync/mega"
+  ./autogen.sh
+  ./configure \
+      --disable-shared \
+      --enable-static \
+      --disable-silent-rules \
+      --disable-curl-checks \
+      --disable-megaapi \
+      --with-cryptopp \
+      --with-sodium \
+      --with-zlib \
+      --with-sqlite \
+      --with-cares \
+      --with-curl \
+      --without-freeimage \
+      --with-libuv \
+      --disable-posix-threads \
+      --disable-examples \
+      --with-libzen \
+      --with-libmediainfo \
+      --prefix="${wrksrc}/src/MEGASync/mega/bindings/qt/3rdparty"
+
+  # build megasync
+  cd "../.."
+  #qmake-qt5 "CONFIG += FULLREQUIREMENTS" MEGA.pro
+  qmake-qt5 MEGA.pro
+	lrelease-qt5 MEGASync/MEGASync.pro
+}
+
+post_install() {
+	vbin MEGASync/megasync
+	vlicense ${wrksrc}/LICENCE.md
+}
