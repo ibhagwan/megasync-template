@@ -1,8 +1,9 @@
 # Template file for 'MEGAsync'
 pkgname=MEGAsync
-version=4.3.3.0
+extname=_Win
+version=4.5.0.0
 revision=1
-wrksrc="${pkgname}-${version}_Linux"
+wrksrc="${pkgname}-${version}_${extname}"
 build_wrksrc=src
 build_style=qmake
 configure_args='"CONFIG+=FULLREQUIREMENTS"'
@@ -22,7 +23,7 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 do_fetch() {
-  git clone --depth 1 --branch v${version}_Linux "https://github.com/meganz/MEGAsync.git" ${wrksrc}
+  git clone --depth 1 --branch v${version}${extname} "https://github.com/meganz/MEGAsync.git" ${wrksrc}
   git clone "https://github.com/meganz/sdk.git" meganz-sdk
   cd ${wrksrc}
   git submodule init
