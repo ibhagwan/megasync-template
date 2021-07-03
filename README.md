@@ -1,6 +1,6 @@
 ## Void Linux template file for xbps-src
 
-Instructions for building latest `MEGAsync` (4.3.3.0) on void linux using `xbps-src`:
+Instructions for building latest `MEGAsync` on void linux using `xbps-src`:
 
 1. Setup the `void-packages` repo:
 
@@ -11,12 +11,11 @@ Instructions for building latest `MEGAsync` (4.3.3.0) on void linux using `xbps-
 ❯ echo XBPS_ALLOW_RESTRICTED=yes >> etc/conf
 ```
 
-2. Download the template repo and copy into `srcpkgs`:
+2. Clone the template repo into `srcpkgs`:
 
 ```sh
-❯ git clone https://github.com/ibhagwan/megasync-template
 ❯ rm -rf ./srcpkgs/MEGAsync
-❯ mv megasync-template ./srcpkgs/MEGAsync
+❯ git clone https://github.com/ibhagwan/megasync-template.git ./srcpkgs/MEGAsync
 ```
 
 3. Build & install the package:

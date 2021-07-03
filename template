@@ -1,7 +1,7 @@
 # Template file for 'MEGAsync'
 pkgname=MEGAsync
 extname=_Win
-version=4.5.0.0
+version=4.5.1.0
 revision=1
 wrksrc="${pkgname}-${version}_${extname}"
 build_wrksrc=src
@@ -17,6 +17,7 @@ homepage="https://mega.co.nz"
 #checksum=9150394fc7c441769eacc52d705faabac835ec3263cca099f7cad84d3b726fb4
 restricted=yes
 nocross=yes
+patch_args=-Np0
 
 case "$XBPS_TARGET_MACHINE" in
 	*-musl|ppc*) broken="google breakpad";;

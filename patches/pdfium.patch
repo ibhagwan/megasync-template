@@ -1,5 +1,5 @@
---- src/MEGASync/mega/bindings/qt/sdk.pri
-+++ -
+--- -
++++ src/MEGASync/mega/bindings/qt/sdk.pri
 @@ -255,6 +255,11 @@ CONFIG(USE_PDFIUM) {
                  DEFINES += HAVE_PDFIUM
                  LIBS += -lpdfium
