@@ -1,7 +1,7 @@
 # Template file for 'MEGAsync'
 pkgname=MEGAsync
 extname=_Win
-version=4.6.8.0
+version=4.7.3.0
 revision=1
 wrksrc="${pkgname}-${version}_${extname}"
 build_wrksrc=src
@@ -29,7 +29,7 @@ do_fetch() {
   cd ${wrksrc}
   git submodule init
   git config submodule.src/MEGASync/mega.url "../meganz-sdk"
-  git submodule update
+  git -c protocol.file.allow=always submodule update --init
 }
 
 #pre_configure() {
