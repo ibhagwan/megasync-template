@@ -1,19 +1,35 @@
 --- -
 +++ src/MEGASync/mega/src/gfx/freeimage.cpp
-@@ -240,7 +240,7 @@
+@@ -209,11 +209,7 @@
+ 
+ #ifdef HAVE_FFMPEG
+ 
+-#ifdef AV_CODEC_CAP_TRUNCATED
+-#define CAP_TRUNCATED AV_CODEC_CAP_TRUNCATED
+-#else
+-#define CAP_TRUNCATED CODEC_CAP_TRUNCATED
+-#endif
++#define CAP_TRUNCATED 0
+ 
+ const char *GfxProviderFreeImage::supportedformatsFfmpeg()
+ {
+@@ -313,7 +309,7 @@
  
      // Find decoder for video stream
      AVCodecID codecId = codecParm->codec_id;
--    AVCodec* decoder = avcodec_find_decoder(codecId);
+-    auto decoder = avcodec_find_decoder(codecId);
 +    const AVCodec* decoder = avcodec_find_decoder(codecId);
      if (!decoder)
      {
          LOG_warn << "Codec not found: " << codecId;
-@@ -257,7 +257,6 @@
+@@ -330,10 +326,6 @@
  
      // Force seeking to key frames
      formatContext->seek2any = false;
--    videoStream->skip_to_keyframe = true;
-     if (decoder->capabilities & CAP_TRUNCATED)
-     {
-         codecContext->flags |= CAP_TRUNCATED;
+-    if (decoder->capabilities & CAP_TRUNCATED)
+-    {
+-        codecContext->flags |= CAP_TRUNCATED;
+-    }
+ 
+     AVPixelFormat sourcePixelFormat = static_cast<AVPixelFormat>(codecParm->format);
+     AVPixelFormat targetPixelFormat = AV_PIX_FMT_BGR24; //raw data expected by freeimage is in this format
