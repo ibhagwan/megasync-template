@@ -1,14 +1,14 @@
 # Template file for 'MEGAsync'
 pkgname=MEGAsync
 extname=_Win
-version=4.11.0.0
+version=5.2.1.0
 revision=1
 wrksrc="${pkgname}-${version}_${extname}"
 build_wrksrc=src
 build_style=qmake
 configure_args='"CONFIG+=FULLREQUIREMENTS"'
-hostmakedepends="git pkg-config autoconf automake libtool qt5-qmake qt5-host-tools"
-makedepends="qt5-tools-devel qt5-devel qt5-svg-devel qt5-x11extras-devel MEGAsdk-devel MEGAsdk-qt libraw-devel libgomp-devel"
+hostmakedepends="git openssh pkg-config autoconf automake libtool qt5-qmake qt5-host-tools"
+makedepends="qt5-tools-devel qt5-devel qt5-svg-devel qt5-x11extras-devel qt5-declarative-devel MEGAsdk-devel MEGAsdk-qt libraw-devel libgomp-devel"
 short_desc="Automated syncing with MEGA Cloud Drive"
 maintainer="John <me@johnnynator.dev>"
 license="custom: Proprietary"
