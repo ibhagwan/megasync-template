@@ -1,6 +1,8 @@
 ## Void Linux template file for xbps-src
 
-Instructions for building latest `MEGAsync` on void linux using `xbps-src`:
+This package is primarily maintained on [cereus-pkgs](https://codeberg.org/cereus-linux/cereus-pkgs/src/branch/master/srcpkgs/megasync) repository but it's mirrored here too for Void Linux users convenience.
+
+Instructions for building latest `megasync` on Void Linux using `xbps-src`:
 
 1. Setup the `void-packages` repo:
 
@@ -14,13 +16,12 @@ Instructions for building latest `MEGAsync` on void linux using `xbps-src`:
 2. Clone the template repo into `srcpkgs`:
 
 ```sh
-❯ rm -rf ./srcpkgs/MEGAsync
-❯ git clone https://github.com/ibhagwan/megasync-template.git ./srcpkgs/MEGAsync
+❯ git clone https://github.com/ibhagwan/megasync-template.git ./srcpkgs/megasync
 ```
 
 3. Build & install the package:
 
 ```sh
-❯ ./xbps-src pkg MEGAsync
-❯ sudo xbps-install --repository=hostdir/binpkgs MEGAsync 
+❯ ./xbps-src pkg megasync
+❯ sudo xbps-install --repository=hostdir/binpkgs/nonfree megasync
 ```
