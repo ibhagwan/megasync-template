@@ -1,77 +1,59 @@
-# Template file for 'MEGAsync'
-pkgname=MEGAsync
-extname=_Win
-version=5.2.1.0
+# Template file for 'megasync'
+# Reference was taken from AUR:
+# https://aur.archlinux.org/packages/megasync
+# This package is primarily maintained at cereus-pkgs repository but it's mirrored to here too.
+
+pkgname=megasync
+version=5.6.1.0
 revision=1
-wrksrc="${pkgname}-${version}_${extname}"
-build_wrksrc=src
-build_style=qmake
-configure_args='"CONFIG+=FULLREQUIREMENTS"'
-hostmakedepends="git openssh pkg-config autoconf automake libtool qt5-qmake qt5-host-tools"
-makedepends="qt5-tools-devel qt5-devel qt5-svg-devel qt5-x11extras-devel qt5-declarative-devel MEGAsdk-devel MEGAsdk-qt libraw-devel libgomp-devel"
+_sdk_commit="ecc873026fcc0355f6d490b8529c9f22d5a4fd8c"
+build_style=cmake
+configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
+ -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/contrib/cmake/modules/packages'
+ -DCMAKE_SKIP_INSTALL_RPATH:BOOL='YES'
+ -DENABLE_DESIGN_TOKENS_IMPORTER:BOOL='OFF'
+ -Wno-dev
+ -DUSE_PDFIUM=OFF
+ -DCMAKE_INSTALL_PREFIX:PATH='/'"
+make_cmd=make
+make_build_target="MEGAsync"
+make_check_target="MEGAsync"
+hostmakedepends="openssh pkg-config qt5-host-tools"
+makedepends="qt5-tools-devel qt5-devel qt5-x11extras-devel qt5-svg-devel
+ qt5-declarative-devel libraw-devel libgomp-devel freeimage-devel ffmpeg-devel
+ readline-devel libmediainfo-devel libuv-devel c-ares-devel crypto++-devel
+ libsodium-devel sqlite-devel"
 short_desc="Automated syncing with MEGA Cloud Drive"
-maintainer="John <me@johnnynator.dev>"
-license="custom: Proprietary"
+maintainer="Kevin Figueroa <kfdevart@disroot.org>"
+license="custom:LicenseRef-Mega-Limited-Code-License"
 homepage="https://mega.co.nz"
-#distfiles="https://github.com/meganz/MEGAsync/archive/v${version}_Linux.tar.gz"
-#checksum=9150394fc7c441769eacc52d705faabac835ec3263cca099f7cad84d3b726fb4
+changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux
+distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz"
+ https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
+ https://raw.githubusercontent.com/meganz/sdk/master/.clang-format"
+checksum="a9170d2c9f4c788c7d28448dde2a4d4dec95f1cad398ff2c22ba23863e315c1e
+ 15b4eef5310340fb11c7ceda48edc47ea6c4eafaf2acc22d64ec78980b3346e1
+ cfadd2e7ad8744080cf73707850c172eb0936ef23a30702b758bde677cd4fefb"
 restricted=yes
-nocross=yes
-patch_args=-Np0
+repository=nonfree
+CXXFLAGS="-DNDEBUG"
+
+skip_extraction="mega-sdk-${_sdk_commit}.tar.gz .clang-format"
+
+export CMAKE_GENERATOR="Unix Makefiles"
 
 case "$XBPS_TARGET_MACHINE" in
 	*-musl|ppc*) broken="google breakpad";;
 esac
 
-do_fetch() {
-  git clone --depth 1 --branch v${version}${extname} "https://github.com/meganz/MEGAsync.git" ${wrksrc}
-  git clone "https://github.com/meganz/sdk.git" meganz-sdk
-  cd ${wrksrc}
-  git submodule init
-  git config submodule.src/MEGASync/mega.url "../meganz-sdk"
-  git -c protocol.file.allow=always submodule update --init
-}
-
-pre_configure() {
-  cd "${wrksrc}/src/MEGASync"
-  sed -i '/DEFINES += REQUIRE_HAVE_PDFIUM/d' MEGASync.pro
-  sed -i '/CONFIG += USE_PDFIUM/d' MEGASync.pro
-}
-
-pre_build() {
-  # build sdk
-  cd "${wrksrc}/src/MEGASync/mega"
-  ./autogen.sh
-  ./configure \
-      --disable-shared \
-      --enable-static \
-      --disable-silent-rules \
-      --disable-curl-checks \
-      --disable-megaapi \
-      --with-cryptopp \
-      --with-sodium \
-      --with-zlib \
-      --with-sqlite \
-      --with-cares \
-      --with-curl \
-      --without-freeimage \
-      --with-libuv \
-      --disable-posix-threads \
-      --disable-examples \
-      --with-libzen \
-      --with-libmediainfo \
-      --prefix="${wrksrc}/src/MEGASync/mega/bindings/qt/3rdparty"
-
-  # build megasync
-  cd "../.."
-  #qmake-qt5 "CONFIG += FULLREQUIREMENTS" MEGA.pro
-  qmake-qt5 MEGA.pro
-  lrelease-qt5 MEGASync/MEGASync.pro
+post_extract() {
+	vsrcextract -C src/MEGASync/mega "mega-sdk-${_sdk_commit}.tar.gz"
+	vsrccopy .clang-format .
 }
 
 post_install() {
-	vbin MEGASync/megasync
-	vlicense ${wrksrc}/LICENCE.md
+	rm -rf ${DESTDIR}/opt
+	vlicense LICENCE.md
+	vlicense installer/terms.txt
+	vlicense src/MEGASync/mega/LICENSE LICENCE-SDK
 }
-
-# vim: set ft=sh:
