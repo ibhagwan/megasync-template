@@ -27,7 +27,7 @@ short_desc="Automated syncing with MEGA Cloud Drive"
 maintainer="Kevin Figueroa <kfdevart@disroot.org>"
 license="custom:LicenseRef-Mega-Limited-Code-License"
 homepage="https://mega.co.nz"
-changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux
+changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux"
 distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz"
  https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
  https://raw.githubusercontent.com/meganz/sdk/master/.clang-format"
