@@ -4,12 +4,12 @@
 # This package is primarily maintained at cereus-pkgs repository but it's mirrored to here too.
 
 pkgname=megasync
-version=5.6.1.0
+version=5.8.0.2
 revision=1
-_sdk_commit="ecc873026fcc0355f6d490b8529c9f22d5a4fd8c"
+_sdk_commit="ddaaf5e587055897f3054a52d4a6dc74d52bb732"
 build_style=cmake
 configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
- -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/contrib/cmake/modules/packages'
+ -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/cmake/modules/packages'
  -DCMAKE_SKIP_INSTALL_RPATH:BOOL='YES'
  -DENABLE_DESIGN_TOKENS_IMPORTER:BOOL='OFF'
  -Wno-dev
@@ -28,14 +28,13 @@ maintainer="Kevin Figueroa <kfdevart@disroot.org>"
 license="custom:LicenseRef-Mega-Limited-Code-License"
 homepage="https://mega.co.nz"
 changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux"
-distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz"
+distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz
  https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
  https://raw.githubusercontent.com/meganz/sdk/master/.clang-format"
-checksum="a9170d2c9f4c788c7d28448dde2a4d4dec95f1cad398ff2c22ba23863e315c1e
- 15b4eef5310340fb11c7ceda48edc47ea6c4eafaf2acc22d64ec78980b3346e1
- cfadd2e7ad8744080cf73707850c172eb0936ef23a30702b758bde677cd4fefb"
+checksum="f6b3b9f8f5af838742025b86dccdcd36c4718260bfa1f270f065682453376d6a
+ 4e7b720c08e21660547e5ac7b4ef54a59d52ad456bf8283fae82b1c19f539756
+ 1d090c5ef0c8ecacc9c647beb0c91a920600e4a5f8a39db65d530da922a93ed0"
 restricted=yes
-repository=nonfree
 CXXFLAGS="-DNDEBUG"
 
 skip_extraction="mega-sdk-${_sdk_commit}.tar.gz .clang-format"
