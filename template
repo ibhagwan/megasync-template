@@ -4,9 +4,9 @@
 # This package is primarily maintained at cereus-pkgs repository but it's mirrored to here too.
 
 pkgname=megasync
-version=5.8.0.2
+version=5.9.0.3
 revision=1
-_sdk_commit="ddaaf5e587055897f3054a52d4a6dc74d52bb732"
+_sdk_commit="7b9051370b97cb15182fb6675a4f0c70b6153153"
 build_style=cmake
 configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
  -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/cmake/modules/packages'
@@ -31,8 +31,8 @@ changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux"
 distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz
  https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
  https://raw.githubusercontent.com/meganz/sdk/master/.clang-format"
-checksum="f6b3b9f8f5af838742025b86dccdcd36c4718260bfa1f270f065682453376d6a
- 4e7b720c08e21660547e5ac7b4ef54a59d52ad456bf8283fae82b1c19f539756
+checksum="66df65d9a61243cfb6410d60afc73b4cd1e7f5a61f355f26b55b3950d11d7efa
+ 101c86b77c405285bb65c16a95dda3792557d4db1ff5043693e98b0699b8d723
  1d090c5ef0c8ecacc9c647beb0c91a920600e4a5f8a39db65d530da922a93ed0"
 restricted=yes
 CXXFLAGS="-DNDEBUG"
