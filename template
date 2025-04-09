@@ -4,9 +4,9 @@
 # This package is primarily maintained at cereus-pkgs repository but it's mirrored to here too.
 
 pkgname=megasync
-version=5.9.0.3
+version=5.10.1.0
 revision=1
-_sdk_commit="7b9051370b97cb15182fb6675a4f0c70b6153153"
+_sdk_commit="b53514e72d569be8993cbe4b2c991da0ded08b78"
 build_style=cmake
 configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
  -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/cmake/modules/packages'
@@ -14,7 +14,8 @@ configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
  -DENABLE_DESIGN_TOKENS_IMPORTER:BOOL='OFF'
  -Wno-dev
  -DUSE_PDFIUM=OFF
- -DCMAKE_INSTALL_PREFIX:PATH='/'"
+ -DCMAKE_INSTALL_PREFIX:PATH='/'
+ -DENABLE_DESKTOP_APP_TESTS:BOOL='OFF'"
 make_cmd=make
 make_build_target="MEGAsync"
 make_check_target="MEGAsync"
@@ -30,9 +31,9 @@ homepage="https://mega.co.nz"
 changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux"
 distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz
  https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
- https://raw.githubusercontent.com/meganz/sdk/master/.clang-format"
-checksum="66df65d9a61243cfb6410d60afc73b4cd1e7f5a61f355f26b55b3950d11d7efa
- 101c86b77c405285bb65c16a95dda3792557d4db1ff5043693e98b0699b8d723
+ https://raw.githubusercontent.com/meganz/sdk/${_sdk_commit}/.clang-format"
+checksum="4d22285839351fd94e4b5694031c5888ec0530b3738a5502c954e7a141841e1b
+ 30cfebe78cbbc219e510fc7ad289dc561b100d2e21010130b63c88e9ac6eef22
  1d090c5ef0c8ecacc9c647beb0c91a920600e4a5f8a39db65d530da922a93ed0"
 restricted=yes
 CXXFLAGS="-DNDEBUG"
