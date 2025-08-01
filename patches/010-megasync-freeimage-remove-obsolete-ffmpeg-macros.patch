@@ -1,26 +1,31 @@
---- a/src/gfx/freeimage.cpp
-+++ b/src/gfx/freeimage.cpp
-@@ -202,12 +202,6 @@ bool GfxProviderFreeImage::readbitmapFre
+diff -ruN a/src/gfx/freeimage.cpp b/src/gfx/freeimage.cpp
+--- a/src/gfx/freeimage.cpp	2025-04-29 14:35:58.000000000 -0400
++++ b/src/gfx/freeimage.cpp	2025-05-28 21:37:57.741006522 -0400
+@@ -484,14 +484,6 @@
  
  #ifdef HAVE_FFMPEG
  
+-#if LIBAVCODEC_VERSION_MAJOR < 60
 -#ifdef AV_CODEC_CAP_TRUNCATED
 -#define CAP_TRUNCATED AV_CODEC_CAP_TRUNCATED
 -#else
 -#define CAP_TRUNCATED CODEC_CAP_TRUNCATED
 -#endif
+-#endif
 -
  const char *GfxProviderFreeImage::supportedformatsFfmpeg()
  {
      return  ".264.265.3g2.3gp.3gpa.3gpp.3gpp2.mp3"
-@@ -309,10 +303,6 @@ bool GfxProviderFreeImage::readbitmapFfm
+@@ -594,12 +586,6 @@
  
      // Force seeking to key frames
      formatContext->seek2any = false;
+-#if LIBAVCODEC_VERSION_MAJOR < 60
 -    if (decoder->capabilities & CAP_TRUNCATED)
 -    {
 -        codecContext->flags |= CAP_TRUNCATED;
 -    }
- 
+-#endif
      AVPixelFormat sourcePixelFormat = static_cast<AVPixelFormat>(codecParm->format);
      AVPixelFormat targetPixelFormat = AV_PIX_FMT_BGR24; //raw data expected by freeimage is in this format
+     SwsContext* swsContext = sws_getContext(width, height, sourcePixelFormat,

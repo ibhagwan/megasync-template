@@ -1,12 +1,13 @@
 # Template file for 'megasync'
 # Reference was taken from AUR:
 # https://aur.archlinux.org/packages/megasync
-# This package is primarily maintained at cereus-pkgs repository but it's mirrored to here too.
+# This package is primarily maintained at cereus-pkgs repository but it's mirrored here too
+# for the convenience of those that rather to stick to void-packages.
 
 pkgname=megasync
-version=5.10.1.0
+version=5.14.0.2
 revision=1
-_sdk_commit="b53514e72d569be8993cbe4b2c991da0ded08b78"
+_sdk_commit="9d816439574996306468895bc784568707bd1b88"
 build_style=cmake
 configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
  -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/cmake/modules/packages'
@@ -15,7 +16,8 @@ configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
  -Wno-dev
  -DUSE_PDFIUM=OFF
  -DCMAKE_INSTALL_PREFIX:PATH='/'
- -DENABLE_DESKTOP_APP_TESTS:BOOL='OFF'"
+ -DENABLE_DESKTOP_APP_TESTS:BOOL='OFF'
+ -DUSE_BREAKPAD='OFF'"
 make_cmd=make
 make_build_target="MEGAsync"
 make_check_target="MEGAsync"
@@ -32,10 +34,11 @@ changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux"
 distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz
  https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
  https://raw.githubusercontent.com/meganz/sdk/${_sdk_commit}/.clang-format"
-checksum="4d22285839351fd94e4b5694031c5888ec0530b3738a5502c954e7a141841e1b
- 30cfebe78cbbc219e510fc7ad289dc561b100d2e21010130b63c88e9ac6eef22
+checksum="cb6bb15663efbe46b2304d364dc1abd997f9c6a71fb18a796fe1105535db9ba2
+ 83c271b4418a9e71a5abe2d87055025220cf8758b2d145a83018d587a218e829
  1d090c5ef0c8ecacc9c647beb0c91a920600e4a5f8a39db65d530da922a93ed0"
 restricted=yes
+repository=nonfree
 CXXFLAGS="-DNDEBUG"
 
 skip_extraction="mega-sdk-${_sdk_commit}.tar.gz .clang-format"
