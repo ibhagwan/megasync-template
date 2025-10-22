@@ -36,7 +36,7 @@ distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linu
  https://raw.githubusercontent.com/meganz/sdk/${_sdk_commit}/.clang-format"
 checksum="2aa309ed268dee336f50c32724e0e6c20de043378e05c3ab68507690b4a5856c
  878af1fce0ddb3190aaee1a19fdc8a9c941de587e1be2c82e52930766500cb7b
- 1d090c5ef0c8ecacc9c647beb0c91a920600e4a5f8a39db65d530da922a93ed0"
+ 0edced6d312b725485c57b93e666d9237aa692163210e215fc0dec99e0e74c7b"
 restricted=yes
 repository=nonfree
 CXXFLAGS="-DNDEBUG"
