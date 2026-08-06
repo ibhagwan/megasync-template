@@ -5,9 +5,9 @@
 # for the convenience of those that rather to stick to void-packages.
 
 pkgname=megasync
-version=6.1.0.2
+version=6.5.1.0
 revision=1
-_sdk_commit="63daa4d1be2944210b974e5f7006641cbd353b80"
+_sdk_commit="715b2b79b6db7c1d7cc7c790e2e15a58164dafbb"
 build_style=cmake
 configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
  -DCMAKE_MODULE_PATH:PATH='${XBPS_BUILDDIR}/${pkgname}-${version}/src/MEGASync/mega/cmake/modules/packages'
@@ -21,7 +21,7 @@ configure_args="-DCMAKE_BUILD_TYPE:STRING='None'
 make_cmd=make
 make_build_target="MEGAsync"
 make_check_target="MEGAsync"
-hostmakedepends="openssh pkg-config qt5-host-tools"
+hostmakedepends="openssh pkg-config qt5-host-tools qt5-qmake"
 makedepends="qt5-tools-devel qt5-devel qt5-x11extras-devel qt5-svg-devel
  qt5-declarative-devel libraw-devel libgomp-devel freeimage-devel ffmpeg-devel
  readline-devel libmediainfo-devel libuv-devel c-ares-devel crypto++-devel
@@ -34,9 +34,9 @@ changelog="https://github.com/meganz/MEGAsync/releases/tag/v${version}_Linux"
 distfiles="https://github.com/meganz/MEGAsync/archive/refs/tags/v${version}_Linux.tar.gz
  https://github.com/meganz/sdk/archive/${_sdk_commit}.tar.gz>mega-sdk-${_sdk_commit}.tar.gz
  https://raw.githubusercontent.com/meganz/sdk/${_sdk_commit}/.clang-format>clang-format-${_sdk_commit}"
-checksum="@f6d1b45cf4f1523f897cb04963f16dd763012687743efdd45d8965d8e8e27217
- @8cbc6c16a74d149739436aafc0044e64f53c8a4b29040962f63233371bba19e3
- 0edced6d312b725485c57b93e666d9237aa692163210e215fc0dec99e0e74c7b"
+checksum="8d5a97e9039841c7296099a1761ec2a8175113f74a3d348068cc74bf685a8ff3
+ cec2028b8c8106814d3d06071ff99c45c7ccf7124c03f078275574cf594574d5
+ a36b9f10585a0040661f3228efbc0d74e340a408eeb5aab76f577c91cdcb6d7b"
 restricted=yes
 repository=nonfree
 CXXFLAGS="-DNDEBUG"
